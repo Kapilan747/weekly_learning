@@ -673,24 +673,6 @@ Day of Week: 0–7
 - → Range
   /  → Interval
 
-Examples:
-
-* * * * * → every minute
-          0 9,17 * * * → 9 AM and 5 PM
-          0 9-17 * * * → every hour from 9 to 5
-          */5 * * * * → every 5 minutes
-
----
-
-## Common Cron Examples
-
-Every minute → * * * * *
-Every 5 minutes → */5 * * * *
-Every hour → 0 * * * *
-Daily at midnight → 0 0 * * *
-Sunday at 3 AM → 0 3 * * 0
-Monday to Friday at 9 AM → 0 9 * * 1-5
-
 ---
 
 ## Cron Commands
