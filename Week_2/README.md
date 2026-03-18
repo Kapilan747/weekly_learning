@@ -655,18 +655,6 @@ User adds job → stored in crontab → crond checks every minute → runs task 
 
 ---
 
-## Crontab Syntax
-
-* * * * * command
-          │ │ │ │ │
-          │ │ │ │ └── Day of Week (0–7, Sunday = 0/7)
-          │ │ │ └──── Month (1–12)
-          │ │ └────── Day of Month (1–31)
-          │ └──────── Hour (0–23)
-          └────────── Minute (0–59)
-
----
-
 ## Time Field Meaning
 
 Minute: 0–59
