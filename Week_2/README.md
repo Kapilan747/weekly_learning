@@ -1,3 +1,156 @@
+# Linux 
+
+## 1. Linux Kernel
+
+### What is Kernel?
+
+* The kernel is the **core component** of the Linux operating system.
+* It acts as a **bridge between hardware and software**.
+* It manages system resources and allows applications to communicate with hardware.
+
+### Key Responsibilities
+
+* **Process Management**
+
+  * Handles creation, scheduling, and termination of processes.
+* **Memory Management**
+
+  * Allocates and deallocates RAM efficiently.
+* **Device Management**
+
+  * Controls hardware devices using drivers.
+* **File System Management**
+
+  * Manages how data is stored and retrieved.
+* **System Calls**
+
+  * Provides interface for user programs to interact with kernel.
+
+### Kernel Types
+
+* **Monolithic Kernel** (Linux uses this)
+
+  * All services run in kernel space.
+* **Microkernel**
+
+  * Minimal kernel, services run in user space.
+
+---
+
+## 2. Linux File System
+
+### What is File System?
+
+* A method used by the OS to **store and organize files** on storage devices.
+* Linux uses a **hierarchical structure** (tree-like).
+
+### Key Features
+
+* Everything is treated as a **file** (including devices).
+* Case-sensitive file names.
+* Supports multiple file systems (ext4, xfs, etc.).
+
+### File Types
+
+* Regular files (-)
+* Directories (d)
+* Symbolic links (l)
+* Block devices (b)
+* Character devices (c)
+
+### File Permissions
+
+* Read (r), Write (w), Execute (x)
+* Applied to:
+
+  * Owner
+  * Group
+  * Others
+
+---
+
+## 3. Linux Directory Structure
+
+### Root Directory (/)
+
+* The top-level directory in Linux.
+* All other directories are under this.
+
+### Important Directories
+
+#### /home
+
+* Stores user personal files.
+* Example: /home/user
+
+#### /root
+
+* Home directory for root (admin user).
+
+#### /bin
+
+* Essential command binaries (ls, cp, mv).
+
+#### /sbin
+
+* System binaries (used by root/admin).
+
+#### /etc
+
+* Configuration files for system and services.
+
+#### /var
+
+* Variable data like logs, cache.
+* Example: /var/log
+
+#### /usr
+
+* User-installed software and libraries.
+* Contains:
+
+  * /usr/bin
+  * /usr/lib
+
+#### /tmp
+
+* Temporary files (auto-deleted periodically).
+
+#### /dev
+
+* Device files (represents hardware).
+
+#### /proc
+
+* Virtual filesystem showing process and system info.
+
+#### /sys
+
+* Interface for kernel and hardware interaction.
+
+#### /lib
+
+* Essential shared libraries for system programs.
+
+#### /boot
+
+* Bootloader files and kernel images.
+
+#### /mnt and /media
+
+* Mount points for external devices.
+
+---
+
+## 4. Key Takeaways
+
+* Kernel = Core of OS, manages hardware and processes.
+* File System = Organizes how data is stored.
+* Directory Structure = Standard layout to locate files easily.
+* Everything in Linux is treated as a file.
+* Root (/) is the starting point of the system.
+
+---
 # Linux User Management 
 
 ## 1. What is a User?
