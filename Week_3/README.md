@@ -1,15 +1,20 @@
 # Shell Scripting
 
-## Flags
+## 1. Numeric Comparison Operators
 
-`-eq`   - equal to
-`-ne`   - not equal to
-`-gt`   - greater than
-`-lt`   - lesser than
-`-ge`   - greater than or equal to
-`-le`   - lesser than or equal to
+| Operator | Description |
+|----------|------------|
+| `-eq`    | Equal to |
+| `-ne`    | Not equal to |
+| `-gt`    | Greater than |
+| `-lt`    | Less than |
+| `-ge`    | Greater than or equal to |
+| `-le`    | Less than or equal to |
 
-<!-- #!/bin/bash
+### Example
+
+```bash
+#!/bin/bash
 
 a=10
 b=20
@@ -38,15 +43,24 @@ fi
 
 if [ $b -le 20 ]; then
     echo "b is less than or equal to 20"
-fi -->
+fi
+```
 
-### String
-`=`     - equal
-`!=`    - not equal to
-`-z`    - is empty
-`-n`    - not empty
+---
 
-<!-- #!/bin/bash
+## 2. String Comparison Operators
+
+| Operator | Description |
+|----------|------------|
+| `=`      | Equal |
+| `!=`     | Not equal |
+| `-z`     | String is empty |
+| `-n`     | String is not empty |
+
+### Example
+
+```bash
+#!/bin/bash
 
 str1="hello"
 str2="world"
@@ -68,55 +82,71 @@ fi
 
 if [ -n "$str1" ]; then
     echo "String is not empty"
-fi -->
-
-```
-${VAR^^} : Converts everything to UPPERCASE.
-${VAR,,} : Converts everything to lowercase.
-${VAR^} : Capitalizes only the first letter.
-${VAR,} : Lowercases only the first letter.
+fi
 ```
 
-<!-- #!/bin/bash
+---
+
+## 3. String Case Manipulation
+
+| Syntax        | Description |
+|---------------|------------|
+| `${VAR^^}`    | Convert entire string to uppercase |
+| `${VAR,,}`    | Convert entire string to lowercase |
+| `${VAR^}`     | Capitalize first letter |
+| `${VAR,}`     | Lowercase first letter |
+
+### Example
+
+```bash
+#!/bin/bash
 
 VAR="hello world"
 
 echo "Original: $VAR"
-
 echo "Uppercase all: ${VAR^^}"
 echo "Lowercase all: ${VAR,,}"
 echo "Capitalize first letter: ${VAR^}"
-echo "Lowercase first letter: ${VAR,}" -->
+echo "Lowercase first letter: ${VAR,}"
+```
 
+---
 
-### Logical Operators
+## 4. Logical Operators
 
-`-a`    - AND
-`-o`    - OR
-`!`     - NOT
+| Operator | Description |
+|----------|------------|
+| `-a`     | AND |
+| `-o`     | OR |
+| `!`      | NOT |
 
-<!-- #!/bin/bash
+### Example (Using `[ ]`)
+
+```bash
+#!/bin/bash
 
 read -p "Enter your age: " age
 read -p "Do you have ID? (yes/no): " id
-
-# Condition using AND (-a), OR (-o), NOT (!)
 
 if [ $age -ge 18 -a "$id" = "yes" ]; then
     echo "Access granted (Adult with ID)"
 
 elif [ $age -lt 18 -o "$id" = "no" ]; then
     echo "Access denied (Minor OR No ID)"
-
 fi
 
-# Using NOT (!)
+# Using NOT
 if [ ! "$id" = "yes" ]; then
     echo "Warning: ID is mandatory"
-fi -->
+fi
+```
 
+### Example (Using `[[ ]]` - Recommended)
 
-<!-- if [[ $age -ge 18 && "$id" == "yes" ]]; then
+```bash
+#!/bin/bash
+
+if [[ $age -ge 18 && "$id" == "yes" ]]; then
     echo "Access granted"
 fi
 
@@ -126,49 +156,67 @@ fi
 
 if [[ "$id" != "yes" ]]; then
     echo "ID is mandatory"
-fi -->
+fi
+```
 
-### Loops
+---
 
-# For loop
+## 5. Loops
+
+### 5.1 For Loop
+
+```bash
 for i in 1 2 3 4
 do
   echo $i
 done
+```
 
-# While loop
+### 5.2 While Loop
+
+```bash
 i=1
 while [ $i -le 5 ]
 do
   echo $i
   ((i++))
 done
+```
 
-# Until loop
+### 5.3 Until Loop
+
+```bash
 i=1
 until [ $i -gt 5 ]
 do
   echo $i
   ((i++))
 done
+```
 
-### File Test Operators
+---
 
-`-e file`    - file exist
-`-f file`    - regular file
-`-d file`    - directory exist
-`-r file`    - Readable
-`-w file`    - Writable
-`-x file`    - Executable
-`-s file`    - File is not empty
+## 6. File Test Operators
 
+| Operator     | Description |
+|--------------|------------|
+| `-e file`    | File exists |
+| `-f file`    | Regular file |
+| `-d file`    | Directory exists |
+| `-r file`    | Readable |
+| `-w file`    | Writable |
+| `-x file`    | Executable |
+| `-s file`    | File is not empty |
 
-<!-- #!/bin/bash
+### Example
+
+```bash
+#!/bin/bash
 
 file="test.txt"
 dir="sample_dir"
 
-# Check if file or directory exists
+# Check if file exists
 if [ -e "$file" ]; then
     echo "$file exists"
 fi
@@ -201,12 +249,15 @@ if [ -s "$file" ]; then
     echo "$file is not empty"
 else
     echo "$file is empty or does not exist"
-fi -->
+fi
+```
+---
 
-### Tasks
+## 7. Practical Tasks (Shell Scripting)
 
-# COUNT LINES, WORDS, CHARACTERS
+### 7.1 Count Lines, Words, Characters
 
+```bash
 #!/bin/bash
 
 file=$1
@@ -214,9 +265,13 @@ file=$1
 echo "Lines: $(wc -l < $file)"
 echo "Words: $(wc -w < $file)"
 echo "Characters: $(wc -c < $file)"
+```
 
-# PROCESS LOG FILE
+---
 
+### 7.2 Process Log File
+
+```bash
 #!/bin/bash
 
 logfile="app.log"
@@ -229,10 +284,13 @@ grep "WARNING" $logfile
 
 echo "Logs from today:"
 grep "$(date '+%Y-%m-%d')" $logfile
+```
 
+---
 
-# SYSTEM INFORMATION SCRIPT
+### 7.3 System Information Script
 
+```bash
 #!/bin/bash
 
 echo "Kernel Version:"
@@ -246,163 +304,244 @@ ps aux | head -10
 
 echo "Installed Packages (Ubuntu):"
 dpkg -l | head -10
+```
 
+---
 
+## 8. Supervisor (Process Management Tool)
 
+### 8.1 Installation
 
+```bash
+sudo apt update
+sudo apt install supervisor
+supervisord --version
+```
 
+---
 
+### 8.2 Create a Dummy Script
 
+Create a simple script that prints the date every second.
 
+```bash
+nano ~/ticktock.sh
+```
 
+#### Script Content
 
-
-
-
-
-
-
-### SUPERVISOR
-
-`sudo apt update`
-
-`sudo apt install supervisor`
-
-`supervisord --version`
-
-
-#### Create a "Dummy" Script
-Create a simple script that prints the date every second. 
-
-Command: `nano ~/ticktock.sh`
-Content:
-bash
+```bash
 #!/bin/bash
+
 while true; do
   echo "Tick: $(date)"
   sleep 1
 done
+```
 
-#### Create the Supervisor Config
+---
 
-Supervisor looks for configuration files in `/etc/supervisor/conf.d/`.
+### 8.3 Create Supervisor Configuration
 
-Command: `sudo nano /etc/supervisor/conf.d/ticktock.conf`
+Supervisor configuration files are stored in:
 
-CONTENT:
+```
+/etc/supervisor/conf.d/
+```
 
+```bash
+sudo nano /etc/supervisor/conf.d/ticktock.conf
+```
+
+#### Configuration Content
+
+```ini
 [program:ticktock]
-command=/home/alphamale/super/ticktock.sh
+command=/home/user/super/ticktock.sh
 autostart=true
-autorestart=true  
+autorestart=true
 stderr_logfile=/var/log/ticktock.err.log
 stdout_logfile=/var/log/ticktock.out.log
-
-
-### Activate and Manage
-
-Reread configs: `sudo supervisorctl reread` (Finds the new file)
-Update: `sudo supervisorctl update` (Starts the new process)
-Check Status: `sudo supervisorctl status`
-The Log Test:  `sudo tail -f /var/log/ticktock.out.log`
-The Crash Test: `sudo supervisorctl status`
-kill it manually: `sudo kill -9 <PID>`
-The Control Test: `sudo supervisorctl`
-Reload Supervisor : `sudo supervisorctl reread`
-`sudo supervisorctl update`
-
-
-##### Inside supervisor 
-```
-To start: `start ticktock` 
-To stop: `stop ticktock`
-To get log: `tail -f ticktock`  
 ```
 
-e.g.
+---
 
+### 8.4 Activate and Manage Supervisor
+
+```bash
+# Reload configuration
+sudo supervisorctl reread
+sudo supervisorctl update
+
+# Check status
+sudo supervisorctl status
+
+# View logs
+sudo tail -f /var/log/ticktock.out.log
+
+# Kill process manually
+sudo kill -9 <PID>
+
+# Open interactive control
+sudo supervisorctl
+```
+
+---
+
+### 8.5 Key Notes
+
+- `reread` → Detects new or changed configuration files
+- `update` → Applies changes and starts/stops programs
+- `autorestart=true` → Ensures process restarts on failure
+- Logs help in debugging (`stdout` and `stderr`)
+
+---
+
+---
+
+## 9. Supervisor (Advanced Usage)
+
+### 9.1 Inside `supervisorctl`
+
+```bash
+# Start process
+start ticktock
+
+# Stop process
+stop ticktock
+
+# Restart process
+restart ticktock
+
+# View status
+status
+
+# View logs (live)
+tail -f ticktock
+```
+
+### Example Commands
+
+```bash
 sudo supervisorctl start test
 sudo supervisorctl stop test
 sudo supervisorctl restart test
 sudo supervisorctl status
+```
 
-##### Logs
+---
 
+### 9.2 Logs
+
+```bash
 cat /var/log/test.out.log
 cat /var/log/test.err.log
+```
 
+---
 
-# Monit
+## 10. Monit (Monitoring Tool)
 
-`sudo apt install monit -y`
+### 10.1 Installation
 
-| Command | Meaning | output |
-| :--- | :--- | :--- |
-| `dpkg -l \| grep monit` |  |<pre><code>i  iotop                           0.6-42-ga14256a-0.2build1               amd64        simple top-like I/O monitor <br>ii  monit                           1:5.33.0-2build2                        amd64        utility for monitoring and managing daemons or similar programs </code></pre>|
-| `monit --version` | To get avilability |  |
-| `monit -V` | To get avilability |  |
-| `sudo systemctl status monit` | To get the status |  |
-| `sudo systemctl disable monit` | To disable in startup |  |
-| `sudo systemctl enable monit` | To enable in startup |  |
-| `cd /etc/monit` | FILES OF MONIT | <pre><code>drwxr-xr-x  6 root root  4096 Mar 18 10:30 ./ <br>drwxr-xr-x 93 root root  4096 Mar 18 10:29 ../<br>drwxr-xr-x  2 root root  4096 Mar 18 10:30 conf-available/<br>drwxr-xr-x  2 root root  4096 Apr  1  2024 conf-enabled/<br>drwxr-xr-x  2 root root  4096 Apr  1  2024 conf.d/<br>-rw-------  1 root root 13503 Apr  1  2024monitrc  <br>drwxr-xr-x  2 root root  4096 Mar 18 10:30 templates/</code></pre>|
-| `sudo cat monitrc` | file to configure monit |  |
-| ` sudo monit reload` | To reload monit | Reinitializing monit daemon |
-| `sudo systemctl reload monit` | To reload monit |  |
-| `sudo systemctl status monit` | To get the status |  |
-| `sudo monit status` | to get the status |  |
+```bash
+sudo apt install monit -y
+```
 
+---
 
-The default credentials for the Monit web interface are:
-Username: admin
-Password: monit 
+### 10.2 Common Commands
+
+| Command | Description |
+|--------|------------|
+| `dpkg -l \| grep monit` | Check if Monit is installed |
+| `monit --version` | Check version |
+| `monit -V` | Detailed version info |
+| `sudo systemctl status monit` | Check service status |
+| `sudo systemctl enable monit` | Enable at startup |
+| `sudo systemctl disable monit` | Disable at startup |
+| `sudo monit reload` | Reload Monit configuration |
+| `sudo systemctl reload monit` | Reload service |
+| `sudo monit status` | Show monitoring status |
+
+---
+
+### 10.3 Monit Configuration Directory
+
+```bash
+cd /etc/monit
+```
+
+#### Important Files
+
+- `monitrc` → Main configuration file  
+- `conf-available/` → Available configs  
+- `conf-enabled/` → Enabled configs  
+- `conf.d/` → Additional configs  
+- `templates/` → Template configs  
+
+```bash
+sudo cat /etc/monit/monitrc
+```
+
+---
+
+### 10.4 Enable Web Interface
+
+Default credentials:
 
 ```
+Username: admin
+Password: monit
+```
+
+#### Configuration Snippet
+
+```bash
 set httpd port 2812 and
     use address 0.0.0.0
     allow 0.0.0.0/0
     allow admin:monit
 ```
 
-To open the monit UI : `http://localhost:2812`
+---
 
-To get WSL host name : `hostname -I`
+### 10.5 Access Monit UI
 
-If above does not work : `http://<YOUR_WSL_IP>:2812`
-
-<br>
-<br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Loops
-
-## FOR LOOP
-e.g.
-
+```bash
+http://localhost:2812
 ```
+
+If using WSL:
+
+```bash
+hostname -I
+```
+
+Then access:
+
+```bash
+http://<YOUR_WSL_IP>:2812
+```
+
+---
+
+## 11. Loops (Detailed)
+
+### 11.1 For Loop Syntax
+
+```bash
 for variable in list
 do
   commands
 done
 ```
 
-#### Example 1: Print numbers
-```
+---
+
+### 11.2 Example 1: Print Numbers
+
+```bash
 #!/bin/bash
 
 for i in 1 2 3 4 5
@@ -411,8 +550,11 @@ do
 done
 ```
 
-#### Example 2: Loop using range
-```
+---
+
+### 11.3 Example 2: Range Loop
+
+```bash
 #!/bin/bash
 
 for i in {1..5}
@@ -421,8 +563,11 @@ do
 done
 ```
 
-#### Example 3: Loop through files
-```
+---
+
+### 11.4 Example 3: Loop Through Files
+
+```bash
 #!/bin/bash
 
 for file in *.log
@@ -431,18 +576,25 @@ do
 done
 ```
 
-## WHILE LOOP
+---
+---
 
-#### Syntax
-```
+## 12. While Loop
+
+### 12.1 Syntax
+
+```bash
 while condition
 do
   commands
 done
 ```
 
-#### Example 1: Counter
-```
+---
+
+### 12.2 Example 1: Counter
+
+```bash
 #!/bin/bash
 
 i=1
@@ -454,8 +606,11 @@ do
 done
 ```
 
-#### Example 2: Read file line by line
-```
+---
+
+### 12.3 Example 2: Read File Line by Line
+
+```bash
 #!/bin/bash
 
 while read line
@@ -464,19 +619,24 @@ do
 done < file.txt
 ```
 
+---
 
-## UNTIL LOOP
+## 13. Until Loop
 
-#### Syntax
-```
+### 13.1 Syntax
+
+```bash
 until condition
 do
   commands
 done
 ```
 
-#### E.g
-```
+---
+
+### 13.2 Example
+
+```bash
 #!/bin/bash
 
 i=1
@@ -488,47 +648,54 @@ do
 done
 ```
 
+---
 
-## Loop Control Statements
+## 14. Loop Control Statements
 
-#### break (stop loop)
-```
+### 14.1 `break` (Stop Loop)
+
+```bash
 for i in {1..10}
 do
-  if [ $i -eq 5 ]
-  then
+  if [ $i -eq 5 ]; then
     break
   fi
   echo $i
 done
 ```
 
-#### continue (skip iteration)
-```
+---
+
+### 14.2 `continue` (Skip Iteration)
+
+```bash
 for i in {1..5}
 do
-  if [ $i -eq 3 ]
-  then
+  if [ $i -eq 3 ]; then
     continue
   fi
   echo $i
 done
 ```
 
-<br>
+---
 
-# Conditions
+## 15. Conditional Statements
 
-## IF Statement
-```
+### 15.1 If Statement
+
+```bash
 if [ condition ]
 then
   commands
 fi
 ```
 
-#### E.g.
-```
+---
+
+### 15.2 Example
+
+```bash
 #!/bin/bash
 
 num=10
@@ -539,10 +706,14 @@ then
 fi
 ```
 
-## IF-ELSE
+---
+---
 
-#### E.g.
-```
+## 16. Conditional Statements (Advanced)
+
+### 16.1 If-Else Statement
+
+```bash
 #!/bin/bash
 
 num=3
@@ -555,10 +726,11 @@ else
 fi
 ```
 
-## IF-ELIF-ELSE
+---
 
-#### E.g.
-```
+### 16.2 If-Elif-Else Statement
+
+```bash
 #!/bin/bash
 
 num=5
@@ -574,46 +746,51 @@ else
 fi
 ```
 
+---
 
-## Comparison Operators
+## 17. Comparison Operators (Consolidated)
 
-#### Numeric
+### 17.1 Numeric Operators
 
-| Operator | Meaning          |
-| :--- | :--- |
-| `-eq`    | equal            |
-| `-ne`    | not equal        |
-| `-gt`    | greater than     |
-| `-lt`    | less than        |
-| `-ge`    | greater or equal |
-| `-le`    | less or equal    |
+| Operator | Meaning |
+|----------|--------|
+| `-eq`    | Equal |
+| `-ne`    | Not equal |
+| `-gt`    | Greater than |
+| `-lt`    | Less than |
+| `-ge`    | Greater than or equal |
+| `-le`    | Less than or equal |
 
-#### String
+---
 
-| Operator | Meaning      |
-| :--- | :--- |
-| `=`      | equal        |
-| `!=`     | not equal    |
-| `-z`     | empty string |
-| `-n`     | not empty    |
+### 17.2 String Operators
 
+| Operator | Meaning |
+|----------|--------|
+| `=`      | Equal |
+| `!=`     | Not equal |
+| `-z`     | Empty string |
+| `-n`     | Not empty |
 
-#### File Conditions
+---
 
-| Condition | Meaning          |
-| :--- | :--- |
-| `-f`      | file exists      |
-| `-d`      | directory exists |
-| `-r`      | readable         |
-| `-w`      | writable         |
-| `-x`      | executable       |
+### 17.3 File Conditions
 
+| Condition | Meaning |
+|-----------|--------|
+| `-f`      | File exists (regular file) |
+| `-d`      | Directory exists |
+| `-r`      | Readable |
+| `-w`      | Writable |
+| `-x`      | Executable |
 
-## Examples
+---
 
-#### Example 1: Check File Exists
+## 18. Practical Examples
 
-```
+### 18.1 Check File Exists
+
+```bash
 #!/bin/bash
 
 if [ -f "test.txt" ]
@@ -624,8 +801,11 @@ else
 fi
 ```
 
-####  Example 2: Check Service Running
-```
+---
+
+### 18.2 Check Service Running
+
+```bash
 #!/bin/bash
 
 if pgrep nginx > /dev/null
@@ -636,8 +816,11 @@ else
 fi
 ```
 
-#### Example 3: Disk Usage Alert
-```
+---
+
+### 18.3 Disk Usage Alert
+
+```bash
 #!/bin/bash
 
 usage=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
@@ -650,16 +833,38 @@ else
 fi
 ```
 
-## Logical Operators
+---
+---
 
-#### AND (&&)
+## 19. Logical Operators (Advanced Usage)
+
+### 19.1 AND (`&&`)
+
+```bash
 if [ $a -gt 5 ] && [ $b -lt 10 ]
-#### OR (||)
-if [ $a -gt 5 ] || [ $b -lt 10 ]
-#### NOT (!)
-if [ ! -f file.txt ]
-## Nested IF
 ```
+
+---
+
+### 19.2 OR (`||`)
+
+```bash
+if [ $a -gt 5 ] || [ $b -lt 10 ]
+```
+
+---
+
+### 19.3 NOT (`!`)
+
+```bash
+if [ ! -f file.txt ]
+```
+
+---
+
+## 20. Nested If Statement
+
+```bash
 #!/bin/bash
 
 num=10
@@ -672,79 +877,118 @@ then
   fi
 fi
 ```
-### Short Form (One-Line IF)
-```
+
+---
+
+## 21. Short Form (One-Line If)
+
+```bash
 [ -f file.txt ] && echo "Exists" || echo "Not exists"
 ```
 
-## Linux Commands
+---
 
-#### grep → Search Text
+## 22. Essential Linux Commands for Scripting
 
-`grep "ERROR" app.log`
+### 22.1 `grep` → Search Text
 
-`grep -c "ERROR" app.log`
-
-`grep -i "error" app.log`
-
-`grep -n "ERROR" app.log`
-
-#### awk → Data Processing Tool
-
-`df -h | awk '{print $1, $5}'`
-
-`df -h | awk 'NR==2 {print $5}'`
-
-#### sed → Stream Editor
-
-`sed 's/error/ERROR/g' file.txt`
-
-`echo "disk=80%" | sed 's/%//'`
-
-#### cut → Extract Columns
-
-`cut -d':' -f1 /etc/passwd`
-
-#### sort → Sort Data
-
-`sort file.txt`
-
-#### Numeric sort
-
-`sort -n numbers.txt`
-
-#### uniq → Remove Duplicates
-
-`sort file.txt | uniq`
-
-#### Count duplicates
-
-`sort file.txt | uniq -c`
-
-#### wc → Count Data
-
-`wc -l file.txt`   # lines
-`wc -w file.txt`   # words
-`wc -c file.txt`   # characters
-
-#### head & tail
-
-head file.txt
-
-head file.txt
-
-tail -f app.log
-
-#### tr → Translate Characters
-
-`echo "hello" | tr 'a-z' 'A-Z'`
-
-
-## NOTE
+```bash
+grep "ERROR" app.log
+grep -c "ERROR" app.log
+grep -i "error" app.log
+grep -n "ERROR" app.log
 ```
-Your App (Python / Node / Script)
+
+---
+
+### 22.2 `awk` → Data Processing
+
+```bash
+df -h | awk '{print $1, $5}'
+df -h | awk 'NR==2 {print $5}'
+```
+
+---
+
+### 22.3 `sed` → Stream Editor
+
+```bash
+sed 's/error/ERROR/g' file.txt
+echo "disk=80%" | sed 's/%//'
+```
+
+---
+
+### 22.4 `cut` → Extract Columns
+
+```bash
+cut -d':' -f1 /etc/passwd
+```
+
+---
+
+### 22.5 `sort` → Sort Data
+
+```bash
+sort file.txt
+sort -n numbers.txt
+```
+
+---
+
+### 22.6 `uniq` → Remove Duplicates
+
+```bash
+sort file.txt | uniq
+sort file.txt | uniq -c
+```
+
+---
+
+### 22.7 `wc` → Count Data
+
+```bash
+wc -l file.txt   # lines
+wc -w file.txt   # words
+wc -c file.txt   # characters
+```
+
+---
+
+### 22.8 `head` & `tail`
+
+```bash
+head file.txt
+tail file.txt
+tail -f app.log
+```
+
+---
+
+### 22.9 `tr` → Translate Characters
+
+```bash
+echo "hello" | tr 'a-z' 'A-Z'
+```
+
+---
+
+## 23. System Design Note (Supervisor + Monit)
+
+```
+Your Application (Python / Node / Script)
         ↓
 Supervisor (start, stop, restart)
         ↓
-Monit (checks health, CPU, memory, alerts)
+Monit (health checks, CPU, memory, alerts)
 ```
+
+---
+
+### Key Insight
+
+- **Supervisor** → Process control (lifecycle management)  
+- **Monit** → Monitoring + alerting (health checks)  
+- Together → Build a **self-healing system**
+
+---
